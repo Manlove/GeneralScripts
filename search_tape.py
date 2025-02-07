@@ -5,12 +5,13 @@
 #
 # search_tape.py /home/documents/tapes/*.pdf LIBID
 
-import PyPDF2, sys
+import PyPDF2
+import sys
 
 library_id = sys.argv[-1]
 tape_files = sys.argv[1:-1]
 
-if len(library_id) < 1 or library_id[-4:] == ".pdf": # change this to "endswith"
+if len(library_id) < 1 or library_id.endswith(".pdf"): # change this to "endswith"
    print(library_id)
    raise ValueError("Please provide a search term")
                     
