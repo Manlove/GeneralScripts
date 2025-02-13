@@ -7,26 +7,27 @@
 
 import PyPDF2
 import sys
+from typing import List
 
-library_id = sys.argv[-1]
-tape_files = sys.argv[1:-1]
+LIBRARY_ID: str = sys.argv[-1]
+TAPE_FILES: List[str] = sys.argv[1:-1]
 
-if len(library_id) < 1 or library_id.endswith(".pdf"): # change this to "endswith"
-   print(library_id)
+if len(LIBRARY_ID) < 1 or LIBRARY_ID.endswith(".pdf"):
+   print(LIBRARY_ID)
    raise ValueError("Please provide a search term")
                     
-elif len(tape_files) < 1:
+elif len(TAPE_FILES) < 1:
    raise ValueError("Please provide one or more tapestation pdf files")
 
 else:
-   for i in tape_files:
+   for i in TAPE_FILES:
       with open(i,'rb') as infile:
         pdf_reader = PyPDF2.PdfReader(infile)
         text = ""
         for page in pdf_reader.pages:
             text += page.extract_text()
 
-        if library_id in text:
+        if LIBRARY_ID in text:
            print(i)
 
 
